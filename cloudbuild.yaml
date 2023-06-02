@@ -1,0 +1,20 @@
+steps:
+# Install dependencies and build your application
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'build']
+
+# Deploy to App Engine
+  - name: 'gcr.io/cloud-builders/gcloud' 
+    args: ['app', 'deploy', 'app.yaml', '--version', '1-0-0', '--project', 'reactexpensehome'] 
+# Specify substitutions for dynamic values
+substitutions:
+  _PROJECT_ID: reacthomeloan
+  _VERSION: 1-0-0
+
+# Optionally, you can specify the build timeout and other settings.
+# timeout: 1200s
+# queueTtl:  3600s
+options:
+  logging : CLOUD_LOGGING_ONLY
